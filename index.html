@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Character Creation</title>
+<style>
+  .character {
+    display: inline-block;
+    width: 200px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  .character img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  #startButton {
+    display: block;
+    margin-top: 20px;
+  }
+  #characterList {
+    margin-top: 20px;
+  }
+  .characterBox {
+    display: inline-block;
+    width: 200px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  .characterBox img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div id="characterCreation">
+  <button id="addCharacter" style="margin: 10px;">+</button>
+  <button id="exportCharacters" style="margin: 10px;">></button>
+  <button id="uploadCharacters" style="margin: 10px;">^</button>
+  <!--<input type="text" id="uploadCharactersString">-->
+</div>
+
+<button id="startButton">Start</button>
+
+<div id="characterList"></div>
+
+<script>
+  var charactersArray = [];
+
+  var gameState;
+  var inGame=false;
+
+  document.getElementById("uploadCharacters").addEventListener("click", function() {
+
+    //var characterStringArray = document.getElementById("uploadCharactersString").value.split("~");
+    //var characterStringArray = navigator.clipboard.readText().toString().split("~");
+    navigator.clipboard.readText()
+  .then(text => {
+    characterStringArray = text.toString().split("Ỏ");
+    for (let i = 0; i < characterStringArray.length; i++) {
+      var characterString = characterStringArray[i];
+      var characterCurrent = characterString.split("ỏ")
+
+      var characters = document.getElementById("characterCreation");
+      var newCharacter = document.createElement("div");
+      newCharacter.classList.add("character");
+      newCharacter.style.margin="10px";
+      var characterCount = characters.querySelectorAll(".character").length + 1;
+      newCharacter.innerHTML = `
+        <label for="name${characterCount}">Name:</label>
+        <input type="text" id="name${characterCount}" name="name${characterCount}" value="${characterCurrent[0]}">
+        <label for="pronouns${characterCount}">Pronouns:</label>
+        <select id="pronouns${characterCount}" name="pronouns${characterCount}">
+            <option value="1">They/Them</option>
+            <option value="2">He/Him</option>
+            <option value="3">She/Her</option>
+            <option value="4">It/It's</option>
+        </select>
+        <label for="image${characterCount}">Image URL:</label>
+        <input type="text" id="image${characterCount}" name="image${characterCount}" value="${characterCurrent[2]}" style="font-size:10px">
+        <img id="preview${characterCount}" src="${characterCurrent[2]}" alt="Preview" style="height: 100px;">
+      `;
+      characters.insertBefore(newCharacter, document.getElementById("addCharacter"));
+      document.getElementById("pronouns"+characterCount).value=characterCurrent[1];
+    }
+  })
+  .catch(err => {
+    alert('Failed to read clipboard contents: ', err);
+  });
+
+  });
+
+  document.getElementById("exportCharacters").addEventListener("click", function() {
+    var characters = document.querySelectorAll(".character");
+    var outputString = "";
+    characters.forEach(function(character, index) {
+      var name = character.querySelector("input[type=text]").value;
+      var pronouns = character.querySelector("select").value;
+      var imageSrc = character.querySelector("img").src;
+      if(index>0) outputString = outputString + "Ỏ"
+      outputString = outputString +name+"ỏ"+pronouns+"ỏ"+imageSrc;
+    });
+    navigator.clipboard.writeText(outputString);
+    alert("Copied to Clipboard");
+  });
+
+  document.getElementById("addCharacter").addEventListener("click", function() {
+    var characters = document.getElementById("characterCreation");
+    var newCharacter = document.createElement("div");
+    newCharacter.classList.add("character");
+    newCharacter.style.margin="10px";
+    newCharacter.style.top="0px";
+    var characterCount = characters.querySelectorAll(".character").length + 1;
+    newCharacter.innerHTML = `
+      <label for="name${characterCount}">Name:</label>
+      <input type="text" id="name${characterCount}" name="name${characterCount}">
+      <label for="pronouns${characterCount}">Pronouns:</label>
+      <select id="pronouns${characterCount}" name="pronouns${characterCount}">
+          <option value="1">They/Them</option>
+          <option value="2">He/Him</option>
+          <option value="3">She/Her</option>
+          <option value="4">It/It's</option>
+      </select>
+      <label for="image${characterCount}">Image URL:</label>
+      <input type="text" id="image${characterCount}" name="image${characterCount}" style="font-size:10px">
+      <img id="preview${characterCount}" src="#" alt="Preview" style="height: 100px;">
+    `;
+    characters.insertBefore(newCharacter, document.getElementById("addCharacter"));
+  });
+
+  document.addEventListener("change", function(event) {
+    if (event.target && event.target.matches("input[type=text]")) {
+      var input = event.target;
+      var imageInput = input.parentNode.querySelector("img");
+      imageInput.src = input.value;
+      imageInput.style.display = "block";
+    }
+  });
+
+  document.getElementById("startButton").addEventListener("click", function() {
+    var characterBoxes = document.getElementById("characterList");
+    characterBoxes.innerHTML = ""; // Clear previous entries
+    
+    charactersArray = []; // Clear previous array
+
+    document.getElementById("startButton").remove();
+    document.getElementById("addCharacter").remove();
+    document.getElementById("exportCharacters").remove();
+    document.getElementById("uploadCharacters").remove();
+    var characters = document.querySelectorAll(".character");
+    characters.forEach(function(character, index) {
+      var name = character.querySelector("input[type=text]").value;
+      var pronouns = character.querySelector("select").value;
+      var imageSrc = character.querySelector("img").src;
+      character.remove();
+ 
+      if(pronouns == 1)
+      {
+        pronouns = ["they","them","theirs","themself"]
+      }
+      else if(pronouns == 2)
+      {
+        pronouns = ["he","him","his","himself"]
+      }
+      else if(pronouns == 3)
+      {
+        pronouns = ["she","her","hers","herself"]
+      }
+      else if(pronouns == 4)
+      {
+        pronouns = ["it","it's","it's","itself"]
+      }
+
+      // Add character object to array
+      charactersArray.push({
+        name: name,
+        pronouns: pronouns,
+        imageSrc: imageSrc
+      });
+
+    });
+    for (let i = 0; i < charactersArray.length; i++) {
+        const character = charactersArray[i];
+        // Display character in box below start button
+        var characterBox = document.createElement("div");
+        characterBox.classList.add("characterBox");
+        characterBox.innerHTML = `
+        <p>${character.name}</p>
+        <p>${character.pronouns}</p>
+        <img src="${character.imageSrc}" alt="${character.name}" style="height: 100px;">
+      `;
+      characterBoxes.appendChild(characterBox);
+    }
+
+    inGame = true;
+    gameState = "bloodbath"
+    livingCharacters = charactersArray;
+    turn();
+  });
+
+  var livingCharacters;
+
+  function turn()
+  {
+    if (gameState == "bloodbath") 
+    {
+      
+    }
+  }
+
+</script>
+
+</body>
+</html>
