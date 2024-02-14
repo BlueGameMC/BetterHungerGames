@@ -1,86 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Character Creation</title>
-<style>
-  .character {
-    display: inline-block;
-    width: 200px;
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid #ccc;
-    text-align: center;
-  }
-  .character img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-  }
-  #startButton {
-    display: block;
-    margin-top: 20px;
-  }
-  #characterList {
-    margin-top: 20px;
-    text-align:center;
-  }
-  .characterBox {
-    display: inline-block;
-    width: 200px;
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid #ccc;
-    text-align: center;
-  }
-  .characterBox img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Creation</title>
+    <style>
+        .character {
+            display: inline-block;
+            width: 200px;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .character img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        #startButton {
+            display: block;
+            margin-top: 20px;
+        }
+
+        #characterList {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .characterBox {
+            display: inline-block;
+            width: 200px;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .characterBox img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
+
 <body>
 
-<div id="characterCreation">
-  <button id="addCharacter" style="margin: 10px;">+</button>
-  <button id="exportCharacters" style="margin: 10px;">></button>
-  <button id="uploadCharacters" style="margin: 10px;">^</button>
-  <!--<input type="text" id="uploadCharactersString">-->
-</div>
+    <div id="characterCreation">
+        <button id="addCharacter" style="margin: 10px;">+</button>
+        <button id="exportCharacters" style="margin: 10px;">></button>
+        <button id="uploadCharacters" style="margin: 10px;">^</button>
+        <!--<input type="text" id="uploadCharactersString">-->
+    </div>
 
-<button id="startButton">Start</button>
+    <button id="startButton">Start</button>
 
-<div id="characterList"></div>
+    <div id="characterList"></div>
 
-<script>
+    <script>
 
-  //Glimmerỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/506208.jpgỎMarvelỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/2555391.jpgỎCloveỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/1334447344.jpgỎCatoỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/3210631.jpgỎKaliaỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/1334446516.jpgỎIanỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/671552.jpg?1334446965ỎTaraỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/9149892.jpgỎEthanỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7454798.jpgỎFoxfaceỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/2352935.jpgỎChrisỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/9596832.jpgỎKaraỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7488391.jpgỎAshtonỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/6708769.jpgỎLeighaỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/5550500.jpgỎSamỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/433180.jpgỎMackenzieỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/2352935.jpgỎSamuelỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/4487615.jpgỎAnnieỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/3532547.jpgỎImanolỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/3876590.jpgỎDakotaỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7846373.jpgỎJeremyỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7456491.jpgỎRueỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7353160.jpgỎThreshỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/5362758.jpgỎKatnissỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/219371.jpgỎPeetaỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/1334534354.jpg
+        //Glimmerỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/506208.jpgỎMarvelỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/2555391.jpgỎCloveỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/1334447344.jpgỎCatoỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/3210631.jpgỎKaliaỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/1334446516.jpgỎIanỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/671552.jpg?1334446965ỎTaraỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/9149892.jpgỎEthanỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7454798.jpgỎFoxfaceỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/2352935.jpgỎChrisỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/9596832.jpgỎKaraỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7488391.jpgỎAshtonỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/6708769.jpgỎLeighaỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/5550500.jpgỎSamỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/433180.jpgỎMackenzieỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/2352935.jpgỎSamuelỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/4487615.jpgỎAnnieỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/3532547.jpgỎImanolỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/3876590.jpgỎDakotaỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7846373.jpgỎJeremyỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7456491.jpgỎRueỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7353160.jpgỎThreshỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/5362758.jpgỎKatnissỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/219371.jpgỎPeetaỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/1334534354.jpg
 
-    var charactersArray = [];
+        var charactersArray = [];
 
-    var gameState;
-    var inGame = false;
+        var gameState;
+        var inGame = false;
 
-    document.getElementById("uploadCharacters").addEventListener("click", function () {
+        document.getElementById("uploadCharacters").addEventListener("click", function () {
 
-        //var characterStringArray = document.getElementById("uploadCharactersString").value.split("~");
-        //var characterStringArray = navigator.clipboard.readText().toString().split("~");
-        navigator.clipboard.readText()
-            .then(text => {
-                //characterStringArray = text.toString().split("Ỏ");
-                characterStringArray = "Glimmerỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/506208.jpgỎMarvelỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/2555391.jpgỎCloveỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/1334447344.jpgỎCatoỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/3210631.jpgỎKaliaỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/1334446516.jpgỎIanỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/671552.jpg?1334446965ỎTaraỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/9149892.jpgỎEthanỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7454798.jpgỎFoxfaceỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/2352935.jpgỎChrisỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/9596832.jpgỎKaraỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7488391.jpgỎAshtonỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/6708769.jpgỎLeighaỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/5550500.jpgỎSamỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/433180.jpgỎMackenzieỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/2352935.jpgỎSamuelỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/4487615.jpgỎAnnieỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/3532547.jpgỎImanolỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/3876590.jpgỎDakotaỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7846373.jpgỎJeremyỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7456491.jpgỎRueỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7353160.jpgỎThreshỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/5362758.jpgỎKatnissỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/219371.jpgỎPeetaỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/1334534354.jpg".split("Ỏ");
-                for (let i = 0; i < characterStringArray.length; i++) {
-                    var characterString = characterStringArray[i];
-                    var characterCurrent = characterString.split("ỏ")
+            //var characterStringArray = document.getElementById("uploadCharactersString").value.split("~");
+            //var characterStringArray = navigator.clipboard.readText().toString().split("~");
+            //navigator.clipboard.readText()
+                //.then(text => {
+                    //characterStringArray = text.toString().split("Ỏ");
+                    characterStringArray = "Glimmerỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/506208.jpgỎMarvelỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/2555391.jpgỎCloveỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/1334447344.jpgỎCatoỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/3210631.jpgỎKaliaỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/1334446516.jpgỎIanỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/671552.jpg?1334446965ỎTaraỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/9149892.jpgỎEthanỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7454798.jpgỎFoxfaceỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/2352935.jpgỎChrisỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/9596832.jpgỎKaraỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7488391.jpgỎAshtonỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/6708769.jpgỎLeighaỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/5550500.jpgỎSamỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/433180.jpgỎMackenzieỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/2352935.jpgỎSamuelỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/4487615.jpgỎAnnieỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/3532547.jpgỎImanolỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/3876590.jpgỎDakotaỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7846373.jpgỎJeremyỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7456491.jpgỎRueỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/7353160.jpgỎThreshỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/5362758.jpgỎKatnissỏ3ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/219371.jpgỎPeetaỏ2ỏhttps://thehungergamesdistrict12katniss.weebly.com/uploads/1/1/7/4/11747811/1334534354.jpg".split("Ỏ");
+                    for (let i = 0; i < characterStringArray.length; i++) {
+                        var characterString = characterStringArray[i];
+                        var characterCurrent = characterString.split("ỏ")
 
-                    var characters = document.getElementById("characterCreation");
-                    var newCharacter = document.createElement("div");
-                    newCharacter.classList.add("character");
-                    newCharacter.style.margin = "10px";
-                    var characterCount = characters.querySelectorAll(".character").length + 1;
-                    newCharacter.innerHTML = `
+                        var characters = document.getElementById("characterCreation");
+                        var newCharacter = document.createElement("div");
+                        newCharacter.classList.add("character");
+                        newCharacter.style.margin = "10px";
+                        var characterCount = characters.querySelectorAll(".character").length + 1;
+                        newCharacter.innerHTML = `
         <label for="name${characterCount}">Name:</label>
         <input type="text" id="name${characterCount}" name="name${characterCount}" value="${characterCurrent[0]}">
         <label for="pronouns${characterCount}">Pronouns:</label>
@@ -94,38 +101,38 @@
         <input type="text" id="image${characterCount}" name="image${characterCount}" value="${characterCurrent[2]}" style="font-size:10px">
         <img id="preview${characterCount}" src="${characterCurrent[2]}" alt="Preview" style="height: 100px;">
       `;
-                    characters.insertBefore(newCharacter, document.getElementById("addCharacter"));
-                    document.getElementById("pronouns" + characterCount).value = characterCurrent[1];
-                }
-            })
-            .catch(err => {
-                alert('Failed to read clipboard contents: ', err);
+                        characters.insertBefore(newCharacter, document.getElementById("addCharacter"));
+                        document.getElementById("pronouns" + characterCount).value = characterCurrent[1];
+                    }
+                })
+                //.catch(err => {
+                //    alert('Failed to read clipboard contents: ', err);
+                //});
+
+        //});
+
+        document.getElementById("exportCharacters").addEventListener("click", function () {
+            var characters = document.querySelectorAll(".character");
+            var outputString = "";
+            characters.forEach(function (character, index) {
+                var name = character.querySelector("input[type=text]").value;
+                var pronouns = character.querySelector("select").value;
+                var imageSrc = character.querySelector("img").src;
+                if (index > 0) outputString = outputString + "Ỏ"
+                outputString = outputString + name + "ỏ" + pronouns + "ỏ" + imageSrc;
             });
-
-    });
-
-    document.getElementById("exportCharacters").addEventListener("click", function () {
-        var characters = document.querySelectorAll(".character");
-        var outputString = "";
-        characters.forEach(function (character, index) {
-            var name = character.querySelector("input[type=text]").value;
-            var pronouns = character.querySelector("select").value;
-            var imageSrc = character.querySelector("img").src;
-            if (index > 0) outputString = outputString + "Ỏ"
-            outputString = outputString + name + "ỏ" + pronouns + "ỏ" + imageSrc;
+            navigator.clipboard.writeText(outputString);
+            alert("Copied to Clipboard");
         });
-        navigator.clipboard.writeText(outputString);
-        alert("Copied to Clipboard");
-    });
 
-    document.getElementById("addCharacter").addEventListener("click", function () {
-        var characters = document.getElementById("characterCreation");
-        var newCharacter = document.createElement("div");
-        newCharacter.classList.add("character");
-        newCharacter.style.margin = "10px";
-        newCharacter.style.top = "0px";
-        var characterCount = characters.querySelectorAll(".character").length + 1;
-        newCharacter.innerHTML = `
+        document.getElementById("addCharacter").addEventListener("click", function () {
+            var characters = document.getElementById("characterCreation");
+            var newCharacter = document.createElement("div");
+            newCharacter.classList.add("character");
+            newCharacter.style.margin = "10px";
+            newCharacter.style.top = "0px";
+            var characterCount = characters.querySelectorAll(".character").length + 1;
+            newCharacter.innerHTML = `
       <label for="name${characterCount}">Name:</label>
       <input type="text" id="name${characterCount}" name="name${characterCount}">
       <label for="pronouns${characterCount}">Pronouns:</label>
@@ -139,115 +146,125 @@
       <input type="text" id="image${characterCount}" name="image${characterCount}" style="font-size:10px">
       <img id="preview${characterCount}" src="#" alt="Preview" style="height: 100px;">
     `;
-        characters.insertBefore(newCharacter, document.getElementById("addCharacter"));
-    });
-
-    document.addEventListener("change", function (event) {
-        if (event.target && event.target.matches("input[type=text]")) {
-            var input = event.target;
-            var imageInput = input.parentNode.querySelector("img");
-            imageInput.src = input.value;
-            imageInput.style.display = "block";
-        }
-    });
-
-    document.getElementById("startButton").addEventListener("click", function () {
-        var characterBoxes = document.getElementById("characterList");
-        characterBoxes.innerHTML = ""; // Clear previous entries
-
-        charactersArray = []; // Clear previous array
-
-        document.getElementById("startButton").remove();
-        document.getElementById("addCharacter").remove();
-        document.getElementById("exportCharacters").remove();
-        document.getElementById("uploadCharacters").remove();
-        var characters = document.querySelectorAll(".character");
-        characters.forEach(function (character, index) {
-            var name = character.querySelector("input[type=text]").value;
-            var pronouns = character.querySelector("select").value;
-            var imageSrc = character.querySelector("img").src;
-            character.remove();
-
-            if (pronouns == 1) {
-                pronouns = ["they", "them", "theirs", "themself"]
-            }
-            else if (pronouns == 2) {
-                pronouns = ["he", "him", "his", "himself"]
-            }
-            else if (pronouns == 3) {
-                pronouns = ["she", "her", "her", "herself"]
-            }
-            else if (pronouns == 4) {
-                pronouns = ["it", "it's", "it's", "itself"]
-            }
-
-            var characterTraits = ["Scared","Agressive", "Weak", "Strong", "Friendly", "Clumsy"]
-
-            // Add character object to array
-            charactersArray.push({
-                name: name,
-                pronouns: pronouns,
-                imageSrc: imageSrc,
-                hurt: false,
-                trait: characterTraits[Math.floor(Math.random() * characterTraits.length)],
-                dead: false,
-                items: []
-            });
-
+            characters.insertBefore(newCharacter, document.getElementById("addCharacter"));
         });
 
-        /*for (let i = 0; i < charactersArray.length; i++) {
-            const character = charactersArray[i];
-            // Display character in box below start button
-            var characterBox = document.createElement("div");
-            characterBox.classList.add("characterBox");
-            characterBox.innerHTML = `
-        <p>${character.name}</p>
-        <p>${character.pronouns}</p>
-        <img src="${character.imageSrc}" alt="${character.name}" style="height: 100px;">
-      `;
-            characterBoxes.appendChild(characterBox);
-        }
-        */
+        document.addEventListener("change", function (event) {
+            if (event.target && event.target.matches("input[type=text]")) {
+                var input = event.target;
+                var imageInput = input.parentNode.querySelector("img");
+                imageInput.src = input.value;
+                imageInput.style.display = "block";
+            }
+        });
 
-        inGame = true;
-        gameState = "bloodbath"
-        livingCharacters = charactersArray;
-        livingCharacters = charactersArray;
-        turn();
-    });
+        document.getElementById("startButton").addEventListener("click", function () {
+            var characterBoxes = document.getElementById("characterList");
+            characterBoxes.innerHTML = ""; // Clear previous entries
 
-    var livingCharacters;
-    var actionCountList = [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 4];
+            charactersArray = []; // Clear previous array
 
-    function turn() {
-        livingCharacters.sort(() => Math.random() - 0.5);
-        var currentCharacters = livingCharacters;
+            document.getElementById("startButton").remove();
+            document.getElementById("addCharacter").remove();
+            document.getElementById("exportCharacters").remove();
+            document.getElementById("uploadCharacters").remove();
+            var characters = document.querySelectorAll(".character");
+            characters.forEach(function (character, index) {
+                var name = character.querySelector("input[type=text]").value;
+                var pronouns = character.querySelector("select").value;
+                var imageSrc = character.querySelector("img").src;
+                character.remove();
 
-        var characterBoxes = document.getElementById("characterList");
-        characterBoxes.innerHTML = ""; // Clear previous entries
+                if (pronouns == 1) {
+                    pronouns = ["they", "them", "theirs", "themself"];
+                }
+                else if (pronouns == 2) {
+                    pronouns = ["he", "him", "his", "himself"];
+                }
+                else if (pronouns == 3) {
+                    pronouns = ["she", "her", "her", "herself"];
+                }
+                else if (pronouns == 4) {
+                    pronouns = ["it", "it's", "it's", "itself"];
+                }
 
-        var length = Math.floor(Math.random()*5) + Math.floor(currentCharacters.length/(Math.floor(Math.random() * 6) + 4));
-        if (gameState == "bloodbath") 
-        {
-            length*=2;
-            currentCharacters = currentCharacters.concat(currentCharacters);
-            currentCharacters.sort(() => Math.random() - 0.5);
-        }
+                var characterTraits = ["Weak", "Strong", "Clumsy"];
 
-        var deadArray = [];
+                // Add character object to array
+                charactersArray.push({
+                    name: name,
+                    pronouns: pronouns,
+                    imageSrc: imageSrc,
+                    hurt: false,
+                    trait: characterTraits[Math.floor(Math.random() * characterTraits.length)],
+                    dead: false,
+                    items: []
+                });
 
-        for (let i = 0; i < length; i++) {
+            });
 
-            if (!deadArray.includes(currentCharacters[0])) {
+            /*for (let i = 0; i < charactersArray.length; i++) {
+                const character = charactersArray[i];
+                // Display character in box below start button
+                var characterBox = document.createElement("div");
+                characterBox.classList.add("characterBox");
+                characterBox.innerHTML = `
+            <p>${character.name}</p>
+            <p>${character.pronouns}</p>
+            <img src="${character.imageSrc}" alt="${character.name}" style="height: 100px;">
+          `;
+                characterBoxes.appendChild(characterBox);
+            }
+            */
+
+            inGame = true;
+            gameState = "bloodbath"
+            livingCharacters = charactersArray;
+            livingCharacters = charactersArray;
+            turn();
+        });
+
+        var livingCharacters;
+        var actionCountList = [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 4];
+
+        function turn() {
+
+            window.scrollTo(0, 0);
+
+            
+            if(document.getElementById("nextTurn") != undefined) {document.getElementById("nextTurn").remove()};
+            
+            livingCharacters.sort(() => Math.random() - 0.5);
+            var currentCharacters = Array.from(livingCharacters);
+            
+            var characterBoxes = document.getElementById("characterList");
+            characterBoxes.innerHTML = ""; // Clear previous entries
+            
+            console.log(livingCharacters.length);
+
+            var length = Math.floor(Math.random() * 4) + Math.floor(currentCharacters.length / (Math.floor(Math.random() * 5) + 1));
+            
+            if (gameState == "bloodbath" || gameState == "bloodbath2"){
+                length = Math.floor(currentCharacters.length / 3) + (Math.floor(Math.random() * 4) - 2);
+            }
+
+            if (length > currentCharacters.length)
+            {
+                length = currentCharacters.length;
+            }
+
+            if(length <= 2)
+            {
+                length = currentCharacters.length;
+            }
+
+            for (let i = 0; i < length; i++) {
 
                 if (gameState == "bloodbath") {
-
                     //var actionCount = actionCountList.random;
                     var actionCount = 1;
                     var action;
-                    if(actionCount == 1)
-                    {
+                    if (actionCount == 1) {
                         /*let actionArray = 
                         [
                             ["@1n# decides to kill #@13# and dies #@1k"],
@@ -260,27 +277,25 @@
                             ["@1n# finds a spear#@1ws"],
                         ]*/
 
-                        let actionArray = 
-                        [
-                            ["@1n# steps off the platform too soon and blows up.#@1k"],
-                            ["@1n# grabs a backpack and retreats.#@1ig"],
-                            ["@1n# finds a bow, some arrows, and a quiver.#@1wb"],
-                            ["@1n# runs into the cornucopia and hides."],
-                            ["@1n# finds a canteen full of water.#@1iw"],
-                            ["@1n# gathers as much food as #@10# can."],
-                            ["@1n# grabs a sword.#@1ws"],
-                            ["@1n# finds a bag full of explosives.#@1we"],
-                            ["@1n# clutches a first aid kit and runs away.#@1ih"],
-                            ["@1n# grabs a backpack, not realizing it is empty."],
-                            ["@1n# grabs a shield leaning on the cornucopia.#@1is"],
-                            ["@1n# falls down a hill and gets hurt.#@1h"],
-                            ["@1n# cuts #@13# and gets hurt.#@1h"],
-                        ];
-
-                        if (currentCharacters[0].hurt)
-                        {
-                            for (let j = 0; j < 5; j++) 
-                            {
+                        let actionArray =
+                            [
+                                ["@1n# steps off the platform too soon and blows up.#@1k"],
+                                ["@1n# grabs a backpack and retreats.#@1ig"],
+                                ["@1n# finds a bow, some arrows, and a quiver.#@1wb"],
+                                ["@1n# runs into the cornucopia and hides."],
+                                ["@1n# finds a canteen full of water.#@1iw"],
+                                ["@1n# gathers as much food as #@10# can."],
+                                ["@1n# grabs a sword.#@1ws"],
+                                ["@1n# finds a bag full of explosives.#@1we"],
+                                ["@1n# clutches a first aid kit and runs away.#@1ih"],
+                                ["@1n# grabs a backpack, not realizing it is empty."],
+                                ["@1n# grabs a shield leaning on the cornucopia.#@1is"],
+                                ["@1n# falls down a hill and gets hurt.#@1h"],
+                                ["@1n# cuts #@13# and gets hurt.#@1h"],
+                                ["@1n# falls down a hill and dies#@1k"],
+                            ];
+                        if (currentCharacters[0].hurt) {
+                            for (let j = 0; j < 5; j++) {
                                 actionArray.push(["@1n# dies from #@12# injuries#@1k"]);
                             }
                         }
@@ -290,40 +305,30 @@
                     }
                     var actionText = action[0].toString().split("#");
                     for (let n = 0; n < actionText.length; n++) {
-                        const current = actionText[n];
-                        if(current.charAt(0) == "@")
-                        {
-                            if (current.charAt(1) == "1")
-                            {
-                                if(current.charAt(2) == "n")
-                                {
+                        var current = actionText[n];
+                        if (current.charAt(0) == "@") {
+                            if (current.charAt(1) == "1") {
+                                if (current.charAt(2) == "n") {
                                     actionText[n] = currentCharacters[0].name;
                                 }
-                                else if(current.charAt(2) == "h")
-                                {
+                                else if (current.charAt(2) == "h") {
                                     actionText[n] = "";
                                     currentCharacters[0].hurt = true;
                                 }
-                                else if(current.charAt(2) == "k")
-                                {
+                                else if (current.charAt(2) == "k") {
                                     currentCharacters[0].dead = true;
-                                    deadArray.push(currentCharacters[0].name);
                                     actionText[n] = "";
                                 }
-                                else if(current.charAt(2) == "0")
-                                {
+                                else if (current.charAt(2) == "0") {
                                     actionText[n] = currentCharacters[0].pronouns[0];
                                 }
-                                else if(current.charAt(2) == "1")
-                                {
+                                else if (current.charAt(2) == "1") {
                                     actionText[n] = currentCharacters[0].pronouns[1];
                                 }
-                                else if(current.charAt(2) == "2")
-                                {
+                                else if (current.charAt(2) == "2") {
                                     actionText[n] = currentCharacters[0].pronouns[2];
                                 }
-                                else if(current.charAt(2) == "3")
-                                {
+                                else if (current.charAt(2) == "3") {
                                     actionText[n] = currentCharacters[0].pronouns[3];
                                 }
                             }
@@ -334,7 +339,7 @@
                     actionTextElement.innerHTML = "<br> <br> <br>" + actionText.join("") + "<br>";
                     characterBoxes.appendChild(actionTextElement);
 
-                    const character = currentCharacters[0];
+                    var character = currentCharacters[0];
                     // Display character in box below start button
                     var characterBox = document.createElement("div");
                     characterBox.classList.add("characterBox");
@@ -345,23 +350,37 @@
                     <img src="${character.imageSrc}" alt="${character.name}" style="height: 120px;">
                     `;
                     }
-                    else
-                    {
-                        livingCharacters.shift();
+                    else {
+                        livingCharacters.splice(findPlayer(character.name),1);
                         characterBox.innerHTML += `
-                    <img src="${character.imageSrc}" alt="${character.name}" style="height: 100px; filter: grayscale(1);">
+                    <img src="${character.imageSrc}" alt="${character.name}" style="height: 120px; filter: grayscale(1);">
                     `;
                     }
-                    
+
                     characterBoxes.appendChild(characterBox);
-        
+
                     currentCharacters.shift();
                 }
             }
-        }
-    }
 
-</script>
+            var nextButton = document.createElement("a");
+            nextButton.innerHTML = `<br><button id="nextTurn" onclick="turn()" style="margin: 10px;">Next</button>`;
+            characterBoxes.appendChild(nextButton);
+        }
+
+        function findPlayer(name)
+        {
+            for (let i = 0; i < livingCharacters.length; i++) {
+                var current = livingCharacters[i];
+                if(current == livingCharacters[i].name)
+                {
+                    return i;
+                }
+            }
+        }
+
+    </script>
 
 </body>
+
 </html>
