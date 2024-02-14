@@ -231,18 +231,31 @@
 
             window.scrollTo(0, 0);
 
+            
             if(document.getElementById("nextTurn") != undefined) {document.getElementById("nextTurn").remove()};
-
+            
             livingCharacters.sort(() => Math.random() - 0.5);
-            var currentCharacters = livingCharacters;
-
+            var currentCharacters = Array.from(livingCharacters);
+            
             var characterBoxes = document.getElementById("characterList");
             characterBoxes.innerHTML = ""; // Clear previous entries
+            
+            console.log(livingCharacters.length);
 
             var length = Math.floor(Math.random() * 4) + Math.floor(currentCharacters.length / (Math.floor(Math.random() * 5) + 1));
             
             if (gameState == "bloodbath" || gameState == "bloodbath2"){
                 length = Math.floor(currentCharacters.length / 3) + (Math.floor(Math.random() * 4) - 2);
+            }
+
+            if (length > currentCharacters.length)
+            {
+                length = currentCharacters.length;
+            }
+
+            if(length <= 2)
+            {
+                length = currentCharacters.length;
             }
 
             for (let i = 0; i < length; i++) {
@@ -333,12 +346,12 @@
                     characterBox.innerHTML = `
                     <p>${character.name}</p>`
                     if (!currentCharacters[0].dead) {
-                        livingCharacters.splice(findPlayer(character.name));
                         characterBox.innerHTML += `
                     <img src="${character.imageSrc}" alt="${character.name}" style="height: 120px;">
                     `;
                     }
                     else {
+                        livingCharacters.splice(findPlayer(character.name),1);
                         characterBox.innerHTML += `
                     <img src="${character.imageSrc}" alt="${character.name}" style="height: 120px; filter: grayscale(1);">
                     `;
