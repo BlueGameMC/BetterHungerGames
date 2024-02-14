@@ -198,7 +198,7 @@
                     hurt: false,
                     trait: characterTraits[Math.floor(Math.random() * characterTraits.length)],
                     dead: false,
-                    items: []
+                    items: ["Food","Water"]
                 });
 
             });
@@ -218,21 +218,21 @@
             */
 
             inGame = true;
-            gameState = "bloodbath"
-            livingCharacters = charactersArray;
+            gameState = "start"
             livingCharacters = charactersArray;
             turn();
         });
 
         var livingCharacters;
         //var actionCountList = [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 4];
-        var actionCountList = [1, 1, 1, 1, 2, 2, 2, 2, 2];
+        var actionCountList = [1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3];
 
         function turn() {
 
             window.scrollTo(0, 0);
 
-            
+
+
             if(document.getElementById("nextTurn") != undefined) {document.getElementById("nextTurn").remove()};
             
             livingCharacters.sort(() => Math.random() - 0.5);
@@ -242,11 +242,34 @@
             
             var characterBoxes = document.getElementById("characterList");
             characterBoxes.innerHTML = ""; // Clear previous entries
-            
+
+
+            if (gameState == "start") {
+                gameState = "bloodbath";
+                var actionTextElement = document.createElement("b");
+                actionTextElement.innerHTML = "<br> <br> <br> Bloodbath <br>";
+                characterBoxes.appendChild(actionTextElement);
+            }
+            else if(gameState == "bloodbath")
+            {
+                gameState = "bloodbath2";
+                var actionTextElement = document.createElement("b");
+                actionTextElement.innerHTML = "<br> <br> <br> Bloodbath (cont.) <br>";
+                characterBoxes.appendChild(actionTextElement);
+            }
+            else if(gameState == "bloodbath2")
+            {
+                gameState = "bloodbath2";
+                var actionTextElement = document.createElement("b");
+                actionTextElement.innerHTML = "<br> <br> <br> Bloodbath (cont.) <br>";
+                characterBoxes.appendChild(actionTextElement);
+            }
+
             var length = Math.floor(Math.random() * 4) + Math.floor(currentCharacters.length / (Math.floor(Math.random() * 5) + 1));
             
             if (livingCharacters.length == 1) {
-                        
+                characterBoxes.innerHTML = ""; // Clear previous entries
+   
                 var actionTextElement = document.createElement("a");
                 actionTextElement.innerHTML = "<br> <br> <br> WINNER!!! <br>";
                 characterBoxes.appendChild(actionTextElement);
@@ -286,12 +309,19 @@
             {
                 if (people == 1) {
                     
+                    if(gameState=="bloodbath" || gameState == "bloodbath2")
+                    {
+                        actionArray.push(["@1n# falls down a hill and gets hurt.#@1h"]);
+                        actionArray.push(["@1n# accidentally cuts #@13# and gets hurt.#@1h"]);
+                        actionArray.push(["@1n# falls down a hill and dies.#@1k"]);
+                    }
+
                     if (character.hurt) {
                         for (let j = 0; j < 5; j++) {
-                            actionArray.push(["@1n# dies from #@12# injuries#@1k"]);
+                            actionArray.push(["@1n# dies from #@12# injuries.#@1k"]);
                         }
-                        actionArray.push(["@1n# heals from #@12# injuries#@1r"]);
-                        actionArray.push(["@1n# heals from #@12# injuries#@1r"]);
+                        actionArray.push(["@1n# heals from #@12# injuries.#@1r"]);
+                        actionArray.push(["@1n# heals from #@12# injuries.#@1r"]);
                         if (character.items.includes("Health")) {
                             for (let j = 0; j < 10; j++) {
                             actionArray.push(["@1n# heals with #@12# first aid kit.#@1r"]);
@@ -300,13 +330,15 @@
                     }
                     if (character.trait == "Clumsy") {
                         for (let j = 0; j < 1; j++) {
-                            actionArray.push(["@1n# falls down a hill and dies#@1k"]);
+                            actionArray.push(["@1n# falls down a hill and dies.#@1k"]);
                             actionArray.push(["@1n# falls down a hill and gets hurt.#@1h"]);
                             actionArray.push(["@1n# grabs a backpack, not realizing it is empty."]);
-                            actionArray.push(["@1n# trips off the podium and blows up.#@1k"]);
+                            if (gameState=="bloodbath") {
+                                actionArray.push(["@1n# trips off the podium and blows up.#@1k"]);
+                            }
                             actionArray.push(["@1n# accidentally cuts #@13# and gets hurt.#@1h"]);
                             if (character.items.includes("Explosive")) {
-                                actionArray.push(["@1n# sets up some explosives but accidentally triggers them too soon, killing #@12#.#@1k"]); 
+                                actionArray.push(["@1n# sets up some explosives but accidentally triggers them too soon, killing #@11#.#@1k"]); 
                             }
                         }
                     }
@@ -314,9 +346,9 @@
                         for (let j = 0; j < 1; j++) {
                             actionArray.push(["@1n# accidentally cuts #@13# and gets hurt.#@1h"]);
                             actionArray.push(["@1n# falls down a hill and gets hurt.#@1h"]);
-                            actionArray.push(["@1n# falls down a hill and dies#@1k"]);
+                            actionArray.push(["@1n# falls down a hill and dies.#@1k"]);
                             actionArray.push(["@1n# runs into the cornucopia and hides."]);
-                            actionArray.push(["@1n# runs into the forest"]);
+                            actionArray.push(["@1n# runs into the forest."]);
                             actionArray.push(["@1n# attempts suicide, but it fails, leaving #@11# hurt.#@1h"]);
                             actionArray.push(["@1n# commits suicide.#@1k"]);
                         }
@@ -331,9 +363,71 @@
                             actionArray.push(["@1n# grabs a backpack of supplies.#@1ig"]);
                         }
                     }
+                    if(!character.items.includes("Water"))
+                    {
+                        if(Math.random() > 0.5)
+                        {
+                            actionArray.push(["@1n# dies of thirst.#@1k"]);
+
+                        } 
+                    }
+                    else if (Math.random() > 0.5)
+                    {
+                        actionArray.push(["@1n# drinks all #@12# water.#@1iw0"]);
+                        actionArray.push(["@1n# spills all #@12# water.#@1iw0"]);
+                        if (character.trait == "Clumsy") 
+                        {
+                            actionArray.push(["@1n# spills all #@12# water.#@1iw0"]);
+                        }
+                    }
+                    if(!character.items.includes("Food"))
+                    {
+                        if(Math.random() > 0.6)
+                        {
+                            actionArray.push(["@1n# starves.#@1k"]);
+                        }
+                    }
+                    else if (Math.random() > 0.5)
+                    {
+                        actionArray.push(["@1n# eats all #@12# food.#@1if0"]);
+                        actionArray.push(["@1n# loses all #@12# food.#@1if0"]);
+                        if (character.trait == "Clumsy") 
+                        {
+                            actionArray.push(["@1n# loses all #@12# food.#@1if0"]);
+                        }
+                    }
+
                 }
                 else if (people == 2)
                 {
+
+                    if(gameState=="bloodbath" || gameState == "bloodbath2")
+                    {
+                        actionArray.push(["@1n# and #@2n# fight and are both injured.#@1h#@2h"]);
+                        actionArray.push(["@1n# strangles #@2n#.#@2k"]);
+                        actionArray.push(["@2n# strangles #@1n#.#@1k"]);
+                        actionArray.push(["@1n# and #@2n# fight and #@2n# is hurt.#@2h"]);
+                        actionArray.push(["@2n# and #@1n# fight and #@1n# is hurt.#@1h"]);
+                        actionArray.push(["@1n# and #@2n# fight and #@2n# is killed.#@2k"]);
+                        actionArray.push(["@2n# and #@1n# fight and #@1n# is killed.#@1k"]);
+                        actionArray.push(["@1n# snaps #@2n#'s neck.#@2k"]);
+                        actionArray.push(["@2n# snaps #@1n#'s neck.#@1k"]);
+                        actionArray.push(["@1n# and #@2n# find water together.#@1iw#@2iw"]);
+                        actionArray.push(["@1n# and #@2n# look for water together, but find nothing."]);
+                    }
+
+                    if(character.trait=="Strong")
+                    {
+                        actionArray.push(["@1n# snaps #@2n#'s neck.#@2k"]);
+                        actionArray.push(["@1n# strangles #@2n#.#@2k"]);
+                        actionArray.push(["@1n# attacks #@2n# and injures #@21#.#@2h"]);
+                    }
+                    if(character.trait=="Weak")
+                    {
+                        actionArray.push(["@2# snaps #@1n#'s neck.#@1k"]);
+                        actionArray.push(["@2n# strangles #@1n#.#@1k"]);
+                        actionArray.push(["@2n# attacks #@1n# and injures #@11#.#@1h"]);
+                    }
                     if (character.items.includes("Sword")) {
                         if (character.trait == "Strong") {
                             for (let j = 0; j < 1; j++) {
@@ -345,6 +439,7 @@
                             for (let j = 0; j < 1; j++) {
                                 actionArray.push(["@1n# tries and fails to stab #@2n# with #@12# sword #@21#."]);
                                 actionArray.push(["@1n# cuts #@2n# with #@12# sword and injures #@21#.#@2h"]);
+                                actionArray.push(["@2n# stabs #@1n# with #@22# sword and kills #@11#.#@1k"]);
                             }
                         }
                         if (character.trait == "Clumsy") {
@@ -370,6 +465,7 @@
                         if (character.trait == "Weak") {
                             for (let j = 0; j < 1; j++) {
                                 actionArray.push(["@1n# hits #@2n# with #@12# bow and injures #@21#.#@2h"]);
+                                actionArray.push(["@2n# shoots #@1n# and kills #@11#.#@1k"]);
                             }
                         }
                         if (character.trait == "Clumsy") {
@@ -404,11 +500,13 @@
 
                 if (currentCharacters.length > 1) {
                 
-                    if (gameState == "bloodbath") {
+                    
                         var actionCount = actionCountList[Math.floor(Math.random() * actionCountList.length)];
+                        if (actionCount > currentCharacters.length) {actionCount=currentCharacters.length}
                         //var actionCount = 1;
                         var action;
-                        if (actionCount == 1) {
+                        if (actionCount == 1) 
+                        {
                             /*let actionArray = 
                             [
                                 ["@1n# decides to kill #@13# and dies #@1k"],
@@ -422,7 +520,7 @@
                             ]*/
 
                             let actionArray =
-                                [
+                            [
                                     ["@1n# steps off the podium too soon and blows up.#@1k"],
                                     ["@1n# finds a bow, some arrows, and a quiver.#@1wb"],
                                     ["@1n# runs into the cornucopia and hides."],
@@ -434,11 +532,12 @@
                                     ["@1n# clutches a first aid kit and runs away.#@1ih"],
                                     ["@1n# grabs a backpack, not realizing it is empty."],
                                     ["@1n# grabs a backpack of supplies.#@1ig"],
-                                    ["@1n# falls down a hill and gets hurt.#@1h"],
-                                    ["@1n# accidentally cuts #@13# and gets hurt.#@1h"],
-                                    ["@1n# falls down a hill and dies#@1k"],
-                                ];
-                            
+                            ];
+                            if(gameState == "bloodbath2")
+                            {
+                                actionArray.shift();
+                            }
+
                             actionArray = addActions(currentCharacters[0], actionArray, 1);
 
                             //console.log(actionArray);
@@ -446,32 +545,31 @@
                             action = actionArray[a];
                         }
                         if (actionCount == 2) {
-                            /*let actionArray = 
-                            [
-                                ["@1n# decides to kill #@13# and dies #@1k"],
-                                ["@1n# decides to kill #@13# and fails, injuring #@13#@1h"],
-                                ["@1n# falls down a hill and gets hurt#@1h"],
-                                ["@1n# falls down a hill and gets hurt#@1h"],
-                                ["@1n# falls down a hill and gets hurt#@1h"],
-                                ["@1n# falls down a hill and dies#@1k"],
-                                ["@1n# finds a backpack full of gear#@1ig"],
-                                ["@1n# finds a spear#@1ws"],
-                            ]*/
 
                             let actionArray =
-                                [
-                                    ["@1n# and #@2n# fight and are both injured.#@1h#@2h"],
-                                    ["@1n# strangles #@2n#.#@2k"],
-                                    ["@1n# and #@2n# fight and #@2n# is hurt.#@2h"],
-                                    ["@1n# and #@2n# fight and #@2n# is killed.#@2k"],
-                                    ["@1n# and #@2n# fight for a backpack and #@1n# strangles #@21# with the straps.#@2k#@1ig"],
-                                    ["@1n# steals a bow from #@2n#.#@1wb"],
-                                    ["@1n# steals a sword from #@2n#.#@1ws"],
-                                ];
+                            [
+                                ["@1n# and #@2n# fight for a backpack and #@1n# strangles #@21# with the straps.#@2k#@1ig"],
+                                ["@2n# and #@1n# fight for a backpack and #@2n# strangles #@11# with the straps.#@1k#@2ig"],
+                                ["@1n# steals a bow from #@2n#.#@1wb"],
+                                ["@2n# steals a bow from #@1n#.#@2wb"],
+                                ["@1n# steals a sword from #@2n#.#@1ws"],
+                                ["@2n# steals a sword from #@1n#.#@2ws"],
+                            ];
                             
                             actionArray = addActions(currentCharacters[0], actionArray, 2);
 
                             //console.log(actionArray);
+                            let a = Math.floor(Math.random() * actionArray.length);
+                            action = actionArray[a];
+                        }
+                        if(actionCount == 3)
+                        {
+                            let actionArray =
+                            [
+                                ["@1n#, #@2n#, and #@3n# form a suicide pact and all kill themselves.#@1k#@2k#@3k"],
+                            ];
+                            actionArray = addActions(currentCharacters[0], actionArray, 3);
+
                             let a = Math.floor(Math.random() * actionArray.length);
                             action = actionArray[a];
                         }
@@ -492,7 +590,7 @@
                                         actionText[n] = "";
                                     } 
                                     else if (current.charAt(2) == "r") {
-                                        currentCharacters[0].dead = false;
+                                        currentCharacters[0].hurt = false;
                                         actionText[n] = "";
                                     }
                                     else if (current.charAt(2) == "w") {
@@ -511,11 +609,25 @@
                                     }
                                     else if (current.charAt(2) == "i") {
                                         if (current.charAt(3) == "w") {
-                                            livingCharacters[findPlayer(currentCharacters[0].name)].items.push("Water");
+                                            if (current.charAt(4) == "0") 
+                                            {
+                                                livingCharacters[findPlayer(currentCharacters[0].name)].items.splice(findItem(currentCharacters[0],"Water"),1);
+                                            }
+                                            else
+                                            {
+                                                livingCharacters[findPlayer(currentCharacters[0].name)].items.push("Water");
+                                            }
                                             actionText[n] = "";
                                         }
                                         if (current.charAt(3) == "f") {
-                                            livingCharacters[findPlayer(currentCharacters[0].name)].items.push("Food");
+                                            if (current.charAt(4) == "0") 
+                                            {
+                                                livingCharacters[findPlayer(currentCharacters[0].name)].items.splice(findItem(currentCharacters[0],"Food"),1);
+                                            }
+                                            else
+                                            {
+                                                livingCharacters[findPlayer(currentCharacters[0].name)].items.push("Food");
+                                            }
                                             actionText[n] = "";
                                         }
                                         if (current.charAt(3) == "g") {
@@ -553,7 +665,7 @@
                                         actionText[n] = "";
                                     } 
                                     else if (current.charAt(2) == "r") {
-                                        currentCharacters[1].dead = false;
+                                        currentCharacters[1].hurt = false;
                                         actionText[n] = "";
                                     }
                                     else if (current.charAt(2) == "w") {
@@ -601,6 +713,67 @@
                                         actionText[n] = currentCharacters[1].pronouns[3];
                                     }
                                 }
+                                if (current.charAt(1) == "3") {
+                                    if (current.charAt(2) == "n") {
+                                        actionText[n] = currentCharacters[2].name;
+                                    }
+                                    else if (current.charAt(2) == "h") {
+                                        actionText[n] = "";
+                                        currentCharacters[2].hurt = true;
+                                    }
+                                    else if (current.charAt(2) == "k") {
+                                        currentCharacters[2].dead = true;
+                                        actionText[n] = "";
+                                    } 
+                                    else if (current.charAt(2) == "r") {
+                                        currentCharacters[2].hurt = false;
+                                        actionText[n] = "";
+                                    }
+                                    else if (current.charAt(2) == "w") {
+                                        if (current.charAt(3) == "b") {
+                                            livingCharacters[findPlayer(currentCharacters[2].name)].items.push("Bow");
+                                            actionText[n] = "";
+                                        }
+                                        if (current.charAt(3) == "s") {
+                                            livingCharacters[findPlayer(currentCharacters[2].name)].items.push("Sword");
+                                            actionText[n] = "";
+                                        }
+                                        if (current.charAt(3) == "e") {
+                                            livingCharacters[findPlayer(currentCharacters[2].name)].items.push("Explosive");
+                                            actionText[n] = "";
+                                        }
+                                    }
+                                    else if (current.charAt(2) == "i") {
+                                        if (current.charAt(3) == "w") {
+                                            livingCharacters[findPlayer(currentCharacters[2].name)].items.push("Water");
+                                            actionText[n] = "";
+                                        }
+                                        if (current.charAt(3) == "f") {
+                                            livingCharacters[findPlayer(currentCharacters[2].name)].items.push("Food");
+                                            actionText[n] = "";
+                                        }
+                                        if (current.charAt(3) == "s") {
+                                            livingCharacters[findPlayer(currentCharacters[2].name)].items.push("Shield");
+                                            actionText[n] = "";
+                                        }
+                                        if (current.charAt(3) == "g") {
+                                            livingCharacters[findPlayer(currentCharacters[2].name)].items.push("Gear");
+                                            actionText[n] = "";
+                                        }
+                                    }
+                                    else if (current.charAt(2) == "0") {
+                                        actionText[n] = currentCharacters[2].pronouns[0];
+                                    }
+                                    else if (current.charAt(2) == "1") {
+                                        actionText[n] = currentCharacters[2].pronouns[1];
+                                    }
+                                    else if (current.charAt(2) == "2") {
+                                        actionText[n] = currentCharacters[2].pronouns[2];
+                                    }
+                                    else if (current.charAt(2) == "3") {
+                                        actionText[n] = currentCharacters[2].pronouns[3];
+                                    }
+                                }
                                 
                             }
                         }
@@ -629,9 +802,30 @@
                         characterBoxes.appendChild(characterBox);
 
 
-                        if (actionCount == 2) 
+                        if (actionCount >= 2) 
                         {
                             character = currentCharacters[1];
+                            // Display character in box below start button
+                            characterBox = document.createElement("div");
+                            characterBox.classList.add("characterBox");
+                            characterBox.innerHTML = `
+                            <p>${character.name}</p>`
+                            if (!character.dead) {
+                                characterBox.innerHTML += `
+                            <img src="${character.imageSrc}" alt="${character.name}" style="height: 120px;">
+                            `;
+                            }
+                            else {
+                                livingCharacters.splice(findPlayer(character.name),1);
+                                characterBox.innerHTML += `
+                            <img src="${character.imageSrc}" alt="${character.name}" style="height: 120px; filter: grayscale(1);">
+                            `;
+                            }
+                            characterBoxes.appendChild(characterBox);
+                        }
+                        if (actionCount >= 3) 
+                        {
+                            character = currentCharacters[2];
                             // Display character in box below start button
                             characterBox = document.createElement("div");
                             characterBox.classList.add("characterBox");
@@ -654,7 +848,7 @@
                         for (let a = 0; a < actionCount; a++) {
                             currentCharacters.shift();
                         }
-                    }
+                    
                 }
             }  
 
@@ -667,6 +861,16 @@
         {
             for (let i = 0; i < livingCharacters.length; i++) {
                 if(name == livingCharacters[i].name)
+                {
+                    return i;
+                }
+            }
+        }
+
+        function findItem(character, item)
+        {
+            for (let i = 0; i < character.items.length; i++) {
+                if(item == character.items[i])
                 {
                     return i;
                 }
