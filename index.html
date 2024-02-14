@@ -225,7 +225,7 @@
 
         var livingCharacters;
         //var actionCountList = [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 4];
-        var actionCountList = [1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3];
+        var actionCountList = [1, 1, 1, 1, 2, 2, 2, 2, 2, 3];
 
         function turn() {
 
@@ -567,6 +567,13 @@
                             let actionArray =
                             [
                                 ["@1n#, #@2n#, and #@3n# form a suicide pact and all kill themselves.#@1k#@2k#@3k"],
+                                ["@1n#, #@2n#, and #@3n# form a suicide pact but it fails, leaving them all injured.#@1h#@2h#@3h"],
+                                ["@1n#, #@2n#, and #@3n# fight for a backpack and #@1n# gets the backpack, killing the other two.#@1ig#@2k#@3k"],
+                                ["@1n#, #@2n#, and #@3n# fight for a backpack and #@3n# gets the backpack, killing the other two.#@3ig#@2k#@1k"],
+                                ["@1n#, #@2n#, and #@3n# fight for a backpack and #@2n# gets the backpack, killing the other two.#@2ig#@1k#@3k"],
+                                ["@1n#, #@2n#, and #@3n# fight for a backpack and #@1n# gets the backpack, hurting the other two.#@1ig#@2h#@3h"],
+                                ["@1n#, #@2n#, and #@3n# fight for a backpack and #@3n# gets the backpack, hurting the other two.#@3ig#@2h#@1h"],
+                                ["@1n#, #@2n#, and #@3n# fight for a backpack and #@2n# gets the backpack, hurting the other two.#@2ig#@1h#@3h"],
                             ];
                             actionArray = addActions(currentCharacters[0], actionArray, 3);
 
